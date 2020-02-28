@@ -14,12 +14,14 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 messaging.requestPermission()
-	.then(function () {
-		console.log('have permission');
+	.then(function() {
+		console.log('Granted');
+		document.getElementById('permission').innerHTML = "Granted";
 		return messaging.getToken();
 	})
 	.then(function (token) {
 		console.log(token);
+		document.getElementById('token').innerHTML = token;
 	})
 	.catch(function (err) {
 		console.log(err);
