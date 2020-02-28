@@ -13,6 +13,8 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
+messaging.usePublicVapidKey("BGlaYXVP5X_YT78CS1g3k3jBPxL_MP-qX6JBR-r7fNsA18INGvHg84LezJ36lbwjG0Q5TNiwztcvK00hPfyXcaA");
+
 messaging.requestPermission()
 	.then(function() {
 		console.log('Granted');
@@ -27,6 +29,6 @@ messaging.requestPermission()
 		console.log(err);
 	});
 
-	messaging.setBackgroundMessageHandler(function(payload) {
-		console.log('[firebase-messaging-sw.js] Received background message ', payload);
+	messaging.onMessage(function(payload) {
+		console.log('onMessage: ', payload);
 	});
