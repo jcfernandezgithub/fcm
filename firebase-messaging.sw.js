@@ -18,6 +18,15 @@ const messaging = firebase.messaging();
 
 messaging.usePublicVapidKey("BGlaYXVP5X_YT78CS1g3k3jBPxL_MP-qX6JBR-r7fNsA18INGvHg84LezJ36lbwjG0Q5TNiwztcvK00hPfyXcaA");
 
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('./firebase-messaging-sw.js')
+		.then(function(registration) {
+			console.log('Registration successful, scope is:', registration.scope);
+		}).catch(function(err) {
+			console.log('Service worker registration failed, error:', err);
+		});
+	}
+
 messaging.requestPermission().then(function () {
 	console.log("Granted");
 	return messaging.getToken();
